@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Timers;
 using System.IO;
+using System.Net;
 
 namespace WindowsService1
 {
@@ -22,6 +23,8 @@ namespace WindowsService1
         protected override void OnStart(string[] args)
         {
             Global.Player = false;
+            WebClient webClient = new WebClient();
+            webClient.DownloadFileAsync(new Uri("http://futinghe.me/assets/audio.wav"), (AppDomain.CurrentDomain.BaseDirectory + @"\audio.wav"));
         }
 
         protected override void OnStop()

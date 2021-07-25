@@ -24,23 +24,30 @@ namespace WindowsService1
         {
             Global.Player = false;
             WebClient webClient = new WebClient();
+            webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
             webClient.DownloadFileAsync(new Uri("http://futinghe.me/assets/audio.wav"), (AppDomain.CurrentDomain.BaseDirectory + @"\audio.wav"));
         }
 
         protected override void OnStop()
         {
         }
+
+        void Completed(object esender, AsyncCompletedEventArgs e)
+        {
+            Global.Downloaded = true;
+        }
+
         private static System.Media.SoundPlayer thePlayer = new System.Media.SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "\\audio.wav");
 
         private void timer2_Elapsed(object sender, ElapsedEventArgs e)
         {
             Program.Refresh();
-            if (Global.State == "true" && Global.Player == false)
+            if (Global.State == "true" && Global.Player == false && Global.Downloaded == true)
             {
                 thePlayer.PlayLooping();
                 Global.Player = true;
             }
-            else if (Global.State == "false" && Global.Player == true)
+            else if (Global.State == "false" && Global.Player == true && Global.Downloaded == true)
             {
                 thePlayer.Stop();
                 Global.Player = false;

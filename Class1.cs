@@ -10,5 +10,6 @@ namespace WindowsService1
     {
         public static string State { get; set; }
         public static bool Player { get; set; }
+        public static bool Downloaded { get; set; }
     }
 }

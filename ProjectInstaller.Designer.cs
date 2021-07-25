@@ -29,10 +29,8 @@ namespace WindowsService1
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
             this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             // 
             // serviceProcessInstaller1
             // 
@@ -46,6 +44,7 @@ namespace WindowsService1
             this.serviceInstaller1.DisplayName = "BraveUpdater";
             this.serviceInstaller1.ServiceName = "BraveUpdater";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
             // 
             // ProjectInstaller
             // 
@@ -59,6 +58,5 @@ namespace WindowsService1
 
         private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
         private System.ServiceProcess.ServiceInstaller serviceInstaller1;
-        private System.Windows.Forms.Timer timer1;
     }
 }
